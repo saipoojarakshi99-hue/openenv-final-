@@ -1,13 +1,18 @@
 [project]
 name = "green-ops-env"
 version = "0.1.0"
-description = "OpenEnv project for carbon optimization"
+description = "OpenEnv project"
 authors = [{name = "Your Name"}]
+
 dependencies = [
     "fastapi",
     "uvicorn",
-    "requests"
+    "requests",
+    "openenv-core>=0.2.0"
 ]
 
+[project.scripts]
+server = "server.app:app"
+
 [tool.openenv]
-entry_point = "inference.py"
+entry_point = "inference.py"  
