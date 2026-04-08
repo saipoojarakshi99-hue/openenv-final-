@@ -1,0 +1,15 @@
+environment:
+  name: green-ops-env
+  description: Carbon optimization environment
+
+actions:
+  - name: optimize
+    description: Optimize server load
+
+observations:
+  - name: servers
+    type: list
+
+rewards:
+  - name: carbon_reduction
+    type: float
