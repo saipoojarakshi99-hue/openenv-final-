@@ -4,21 +4,15 @@ app = FastAPI()
 
 @app.get("/")
 def home():
-    return {"message": "Green Ops API running"}
+    return {"message": "API is running"}
 
 @app.post("/reset")
 def reset():
-    return {"status": "environment reset"}
+    return {"status": "ok"}
 
 @app.post("/step")
 def step(data: dict):
-    servers = data.get("servers", [])
-    
-    # Simple RL-like logic
-    action = "optimize_power"
-    confidence = 0.9
-    
     return {
-        "action": action,
-        "confidence": confidence
-    }
+        "action": "optimize",
+        "confidence": 0.9
+    }    
