@@ -1,4 +1,5 @@
 from fastapi import FastAPI
+from fastapi import Request
 import uvicorn
 
 app = FastAPI()
@@ -12,12 +13,14 @@ def reset():
     return {"status": "ok"}
 
 @app.post("/step")
-def step(data):
+async def step(request: Request):
+    data = await request.json()   
+
     return {
         "tasks": [
-            {"task_id": "cpu_task", "score": 0.5},
-            {"task_id": "power_task", "score": 0.7},
-            {"task_id": "efficiency_task", "score": 0.4}
+            {"task_id": "cpu_task", "score": 0.51},
+            {"task_id": "power_task", "score": 0.72},
+            {"task_id": "efficiency_task", "score": 0.43}
         ]
     }
 
