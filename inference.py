@@ -1,4 +1,5 @@
 import requests
+import json
 
 BASE_URL = "http://localhost:7860"
 
@@ -11,13 +12,17 @@ def step(data):
     return response.json()
 
 if __name__ == "__main__":
-    print("Reset:", reset())
-    
     sample_data = {
         "servers": [
             {"cpu": 70, "power": "coal"},
             {"cpu": 30, "power": "solar"}
         ]
     }
-    
-    print("Step:", step(sample_data))
+
+    print("[START]")
+    print(json.dumps(reset()))
+
+    print("[STEP]")
+    print(json.dumps(step(sample_data)))
+
+    print("[END]")
