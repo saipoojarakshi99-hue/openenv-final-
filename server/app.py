@@ -14,41 +14,31 @@ def reset():
 
 @app.post("/step")
 async def step(request: Request):
-    try:
-        data = await request.json()
+    data = await request.json()
 
-        servers = data.get("servers", [])
+    servers = data.get("servers", [])
 
-        tasks = []
+    tasks = []
 
-        for i, server in enumerate(servers):
-            cpu = server.get("cpu", 0)
-            power = server.get("power", "")
+    for i, server in enumerate(servers):
+        cpu = server.get("cpu", 50)
 
-            # Generate score dynamically (IMPORTANT)
-            score = min(max(cpu / 100, 0.01), 0.99)
+        # score between (0,1)
+        score = max(0.01, min(cpu / 100, 0.99))
 
-            tasks.append({
-                "task_id": f"task_{i+1}",
-                "score": float(score)
-            })
+        tasks.append({
+            "id": f"task_{i+1}",   
+            "score": float(score)
+        })
 
-        # Ensure at least 3 tasks
-        while len(tasks) < 3:
-            tasks.append({
-                "task_id": f"extra_{len(tasks)+1}",
-                "score": 0.5
-            })
+    # ensure minimum 3 tasks
+    while len(tasks) < 3:
+        tasks.append({
+            "id": f"extra_{len(tasks)+1}",
+            "score": 0.5
+        })
 
-        return {"tasks": tasks}
-
-    except Exception as e:
-        return {"tasks": [
-            {"task_id": "fallback1", "score": 0.3},
-            {"task_id": "fallback2", "score": 0.6},
-            {"task_id": "fallback3", "score": 0.8}
-        ]}
-
+    return {"tasks": tasks}
 
 def main():
     uvicorn.run(app, host="0.0.0.0", port=7860)
