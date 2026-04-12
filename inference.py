@@ -67,4 +67,4 @@ if __name__ == "__main__":
     print("[STEP]")
     print(json.dumps(step(sample_data)))
 
-    print("[END]"). 
+    print("[END]")
