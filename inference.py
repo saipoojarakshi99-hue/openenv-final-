@@ -1,6 +1,6 @@
 import requests
 
-BASE_URL = "http://localhost:8000"
+BASE_URL = "http://localhost:7680"
 
 def reset():
     response = requests.post(f"{BASE_URL}/reset")
